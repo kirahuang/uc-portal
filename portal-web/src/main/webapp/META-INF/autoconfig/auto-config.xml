@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+
+    <!--logger -->
+    <group name="logger">
+        <property name="logger.dest"                defaultValue="STDOUT"   />
+        <property name="logger.logLevel"            defaultValue="DEBUG"   />
+        <property name="logger.lib.logLevel"        defaultValue="DEBUG"     />
+        <property name="logger.mybatis.logLevel"    defaultValue="DEBUG"   />
+        <property name="logger.logback.logpath"     defaultValue="C:/logs/purepay" />
+        <property name="logger.outside.logLevel"    defaultValue="DEBUG"   />
+    </group>
+
+    <!--test -->
+    <group name="logger">
+        <property name="test.key"                 defaultValue="md5Key"   />
+        <property name="test.merchant"            defaultValue="2374628347121"   />
+        <property name="test.url"                 defaultValue="http://192.168.165.198:8999/mapi/unioncashier/"     />
+    </group>
+
+
+    <!-- autoconfig-->
+    <script>
+        <generate template="portal.properties.vm" destfile="WEB-INF/classes/properties/portal.properties"
+                  charset="UTF-8"/>
+        <generate template="logback.xml.vm" destfile="WEB-INF/classes/logback.xml"
+                  charset="UTF-8"/>
+    </script>
+
+</config>
+

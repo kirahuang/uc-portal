@@ -1,0 +1,246 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.bestpay.unioncashier</groupId>
+  <artifactId>uc-portal</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <modules>
+    <module>portal-web</module>
+  </modules>
+  <packaging>pom</packaging>
+
+  <properties>
+      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+      <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+      <bestpaycommon.version>1.0.1</bestpaycommon.version>
+      <lombok.version>1.16.4</lombok.version>
+      <hibernate.validator>5.0.1.Final</hibernate.validator>
+      <bestpay-logback.version>1.3.1</bestpay-logback.version>
+      <org.springframework.version>4.0.3.RELEASE</org.springframework.version>
+      <gateway.bank.version>1.0.3.RELEASE</gateway.bank.version>
+      <javax.validator.version>1.1.0.Final</javax.validator.version>
+      <org.mybatis.version>3.2.1</org.mybatis.version>
+      <org.mybatis.spring.version>1.2.0</org.mybatis.spring.version>
+      <ojdbc7.version>12.1.0.1.0</ojdbc7.version>
+      <commons.dbcp.version>1.4</commons.dbcp.version>
+      <alibaba.dubbo.version>2.5.3</alibaba.dubbo.version>
+      <zkclient.version>0.3</zkclient.version>
+      <autoconfig.plugin.version>1.2</autoconfig.plugin.version>
+      <alibaba.fastjson>1.1.15</alibaba.fastjson>
+      <httpcomponents.http.version>4.3.5</httpcomponents.http.version>
+      <httpcomponents.http.core.version>4.4.1</httpcomponents.http.core.version>
+      <httpcomponents.http.client.version>4.5</httpcomponents.http.client.version>
+  </properties>
+
+
+  <dependencyManagement>
+    <!-- declare version for all modules-->
+    <dependencies>
+
+      <!-- bestpay-commons-->
+        <dependency>
+        <groupId>com.bestpay</groupId>
+        <artifactId>commons</artifactId>
+        <version>${bestpaycommon.version}</version>
+        </dependency>
+
+      <!--  lombok -->
+      <dependency>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+        <version>${lombok.version}</version>
+      </dependency>
+
+      <!--hibernate.validator-->
+      <dependency>
+        <groupId>org.hibernate</groupId>
+        <artifactId>hibernate-validator</artifactId>
+        <version>${hibernate.validator}</version>
+      </dependency>
+
+      <!-- log -->
+      <dependency>
+        <groupId>com.bestpay</groupId>
+        <artifactId>bestpay-logback</artifactId>
+        <version>${bestpay-logback.version}</version>
+      </dependency>
+
+      <!-- spring core-->
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-context</artifactId>
+        <version>${org.springframework.version}</version>
+        <exclusions>
+          <exclusion>
+            <artifactId>commons-logging</artifactId>
+            <groupId>commons-logging</groupId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+
+      <!-- spring webmvc-->
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-webmvc</artifactId>
+        <version>${org.springframework.version}</version>
+        <exclusions>
+          <exclusion>
+            <artifactId>commons-logging</artifactId>
+            <groupId>commons-logging</groupId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+
+      <!-- spring jdbc-->
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-jdbc</artifactId>
+        <version>${org.springframework.version}</version>
+        <exclusions>
+          <exclusion>
+            <artifactId>commons-logging</artifactId>
+            <groupId>commons-logging</groupId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+
+      <!-- mybatis -->
+      <dependency>
+        <groupId>org.mybatis</groupId>
+        <artifactId>mybatis</artifactId>
+        <version>${org.mybatis.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.mybatis</groupId>
+        <artifactId>mybatis-spring</artifactId>
+        <version>${org.mybatis.spring.version}</version>
+      </dependency>
+
+      <!-- dbcp -->
+      <dependency>
+        <groupId>commons-dbcp</groupId>
+        <artifactId>commons-dbcp</artifactId>
+        <version>${commons.dbcp.version}</version>
+      </dependency>
+
+      <!-- ojdbc -->
+      <dependency>
+        <groupId>ojdbc7</groupId>
+        <artifactId>ojdbc7</artifactId>
+        <version>${ojdbc7.version}</version>
+      </dependency>
+
+      <!-- javax validation-->
+      <dependency>
+        <groupId>javax.validation</groupId>
+        <artifactId>validation-api</artifactId>
+        <version>${javax.validator.version}</version>
+      </dependency>
+
+      <!-- dubbo -->
+      <dependency>
+        <groupId>com.alibaba</groupId>
+        <artifactId>dubbo</artifactId>
+        <version>${alibaba.dubbo.version}</version>
+        <exclusions>
+          <exclusion>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring</artifactId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+
+      <!--zookeeper -->
+      <dependency>
+        <groupId>com.101tec</groupId>
+        <artifactId>zkclient</artifactId>
+        <version>${zkclient.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.alibaba</groupId>
+        <artifactId>fastjson</artifactId>
+        <version>${alibaba.fastjson}</version>
+      </dependency>
+
+      <!--http配置-->
+      <dependency>
+        <groupId>org.apache.httpcomponents</groupId>
+        <artifactId>httpcore</artifactId>
+        <version>${httpcomponents.http.core.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.apache.httpcomponents</groupId>
+        <artifactId>httpclient</artifactId>
+        <version>${httpcomponents.http.client.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.apache.httpcomponents</groupId>
+        <artifactId>httpmime</artifactId>
+        <version>${httpcomponents.http.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.bestpay</groupId>
+        <artifactId>commons</artifactId>
+        <version>${bestpaycommon.version}</version>
+      </dependency>
+
+    </dependencies>
+  </dependencyManagement>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.1</version>
+        <configuration>
+          <source>1.8</source>
+          <target>1.8</target>
+          <encoding>UTF-8</encoding>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-resources-plugin</artifactId>
+        <version>2.7</version>
+        <configuration>
+          <nonFilteredFileExtensions>
+            <nonFilteredFileExtension>xls</nonFilteredFileExtension>
+          </nonFilteredFileExtensions>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.mortbay.jetty</groupId>
+        <artifactId>jetty-maven-plugin</artifactId>
+        <version>8.1.14.v20131031</version>
+        <configuration>
+          <war>web/target/web.war</war>
+          <scanIntervalSeconds>1</scanIntervalSeconds>
+          <stopPort>9966</stopPort>
+          <stopKey>foo</stopKey>
+          <connectors>
+            <connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
+              <port>7777</port>
+              <maxIdleTime>60000</maxIdleTime>
+            </connector>
+          </connectors>
+          <webAppConfig>
+            <contextPath>/</contextPath>
+          </webAppConfig>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-archetype-plugin</artifactId>
+        <version>2.2</version>
+      </plugin>
+    </plugins>
+  </build>
+
+
+</project>

@@ -1,0 +1,3 @@
+TEST_KEY      = {$test.key}
+TEST_MERCHANT = ${test.merchant}
+TEST_URL      = ${test.url}
