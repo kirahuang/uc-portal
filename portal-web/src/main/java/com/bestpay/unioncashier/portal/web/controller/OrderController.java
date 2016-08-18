@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSONObject;
 import com.bestpay.unioncashier.portal.web.controller.dto.request.CancelRequestDto;
 import com.bestpay.unioncashier.portal.web.controller.dto.request.PaymentRequestDto;
-import com.bestpay.unioncashier.portal.web.controller.dto.request.PaymentResponseDto;
 import com.bestpay.unioncashier.portal.web.controller.dto.request.QueryRequestDto;
 import com.bestpay.unioncashier.portal.web.controller.dto.request.RefundRequestDto;
+import com.bestpay.unioncashier.portal.web.controller.dto.response.CancelResponseDto;
+import com.bestpay.unioncashier.portal.web.controller.dto.response.PaymentResponseDto;
+import com.bestpay.unioncashier.portal.web.controller.dto.response.RefundResponseDto;
 import com.bestpay.unioncashier.portal.web.controller.helper.OrderControllerHelper;
 import com.bestpay.unioncashier.portal.web.controller.util.JsonConverter;
 
@@ -42,7 +44,7 @@ public class OrderController {
     @Value("${TEST_URL}")
     private String                TEST_URL;
     
-    //支付map
+    //map
     public static Map<String,String> orderMap = new HashMap<>();
     
 
@@ -100,7 +102,9 @@ public class OrderController {
             
             log.info("撤销请求结果{}", result);
             // 验签
-            orderControllerHelper.validate(result);
+            if(orderControllerHelper.validate(result)&& response!=null && response.getIsSuccess().equals("T")&& response.getOrderState().equals("SUCCESS")){
+                orderMap.put(response.getOutCancelNo(), "CANCEL-"+response.getOutCancelNo());
+            }
 
             return result;
         } catch (Exception e) {
@@ -125,9 +129,11 @@ public class OrderController {
             //发送请求
             String result = orderControllerHelper.requestToHttpServer(map, refundRequestDto, "service.do");
             log.info("退款请求结果{}", result);
+            RefundResponseDto response = JSONObject.parseObject(result, RefundResponseDto.class);
             // 验签
-            orderControllerHelper.validate(result);
-
+           if( orderControllerHelper.validate(result) && response!=null && response.getIsSuccess().equals("T")&& response.getOrderState().equals("SUCCESS")){
+                orderMap.put(response.getOutRefundNo(), "REFUND-"+response.getOutRefundNo());
+            }
             return result;
         } catch (Exception e) {
             log.error("HTTP调用发生异常:{}");

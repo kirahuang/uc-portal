@@ -1,9 +1,17 @@
 package com.bestpay.unioncashier.portal.web.controller;
 
-import lombok.extern.slf4j.Slf4j;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.alibaba.fastjson.JSONObject;
 
 /**
  * 类注释
@@ -50,6 +58,34 @@ public class EntryController {
     public ModelAndView prepayment(){
         ModelAndView mac=new ModelAndView("prepayment");
         return  mac;
+    }
+    
+    
+    @RequestMapping(value="orderSelect")
+    public void orderSelect(@RequestParam("type")String type,HttpServletRequest request, HttpServletResponse response) throws Exception{
+        
+        Map<String, String> map = new HashMap<>();
+        
+        for (Map.Entry<String, String> entry : OrderController.orderMap.entrySet()) {
+            if(type.equals("PAY")){
+                if(entry.getValue().indexOf("PAY")!=-1){
+                    map.put(entry.getKey(), entry.getValue());
+                }
+            }else if(type.equals("REFUND")){
+                if(entry.getValue().indexOf("REFUND")!=-1){
+                    map.put(entry.getKey(), entry.getValue());
+                }
+            }else if(type.equals("CANCEL")){
+                if(entry.getValue().indexOf("CANCEL")!=-1){
+                    map.put(entry.getKey(), entry.getValue());
+                }
+            }
+        }
+        
+        response.setCharacterEncoding("utf-8");
+        response.getWriter().write(JSONObject.toJSONString(map));
+        response.getWriter().flush();
+       
     }
 
 }

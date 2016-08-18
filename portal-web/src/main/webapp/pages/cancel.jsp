@@ -70,22 +70,23 @@
                     <span class="input-group-addon">商户原交易订单号</span>
                 </td>
                 <td>
-                
+                 <div align="left">
                 <select id="outTradeNo" name="outTradeNo">
 
                 
                 <%
                 
                 for (Map.Entry<String, String> entry : OrderController.orderMap.entrySet()) {
-                    
+                    if(entry.getValue().indexOf("PAY-")!=-1){
                     %>
-                    <option value ="<%=entry.getKey() %>"><%=entry.getKey() %></option>
+                    <option value ="<%=entry.getKey() %>"><%=entry.getValue() %></option>
                     <%
+                    }
                    }
            %>
                
                 </select>
-                
+                </div>
                 </td>
             </tr>
             <tr style="height: 25px">

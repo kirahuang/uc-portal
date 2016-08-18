@@ -15,11 +15,32 @@
 <head>
     <title>订单查询</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- Bootstrap -->
-    <link type="text/css" href="<%=path %>/css/web/bootstrap.min.css" rel="stylesheet" />
     <style type="text/css" rel="stylesheet">
         .he{height:20px}
     </style>
+    <script language="JavaScript"src="../js/jquery-1.7.2.min.js"></script>
+     <script>
+     $(document).ready(function () {
+         $('#orderType').change(function(){
+        	 alert($(this).val()); 
+        	   //清除二级下拉列表
+        	 <%--   $("#outOrderNo").empty();
+        	   
+        	   $.post(<%=basePath%>+'pages/orderSelect?type='+$(this).val(),function(result){
+        		    alert(111);
+        		  }); --%>
+        	   
+        		  $.getJSON('<%=basePath%>pages/orderSelect', { type: $(this).val() },function(result){
+        			     $.each(result, function(i, field){
+        			      $("#outOrderNo").append($("<option/>").text(field).attr("value",i));
+        			      
+        			      
+        			    }); 
+        			  });
+        	 
+         });
+     });
+</script>
 </head>
 
 <body>
@@ -65,14 +86,6 @@
             </tr>
             <tr style="height: 25px">
                 <td>
-                    <span class="input-group-addon">商户唯一订单号</span>
-                </td>
-                <td>
-                    <input type="text" class="form-control input-lg,he" id="outOrderNo" name="outOrderNo" value=""/>
-                </td>
-            </tr>
-            <tr style="height: 25px">
-                <td>
                     <span class="input-group-addon">业务类型</span>
                 </td>
                 <td>
@@ -90,6 +103,18 @@
             </tr>
             <tr style="height: 25px">
                 <td>
+                    <span class="input-group-addon">商户唯一订单号</span>
+                </td>
+                <td>
+                <div align="left">
+                
+                  <select id="outOrderNo" name="outOrderNo" />
+                    <!-- <input type="text" class="form-control input-lg,he" id="outOrderNo" name="outOrderNo" value=""/> -->
+                </div>
+                </td>
+            </tr>
+            <tr style="height: 25px">
+                <td>
                     <span class="input-group-addon">公共业务扩展信息</span>
                 </td>
                 <td>
@@ -100,9 +125,7 @@
 
 
         <span>
-        <p>
             <button type="submit" class="btn btn-success btn-lg">提交</button>
-        </p>
         </span>
     </form>
 
