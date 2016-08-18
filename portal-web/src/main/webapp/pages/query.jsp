@@ -22,14 +22,8 @@
      <script>
      $(document).ready(function () {
          $('#orderType').change(function(){
-        	 alert($(this).val()); 
         	   //清除二级下拉列表
-        	 <%--   $("#outOrderNo").empty();
-        	   
-        	   $.post(<%=basePath%>+'pages/orderSelect?type='+$(this).val(),function(result){
-        		    alert(111);
-        		  }); --%>
-        	   
+        	    $("#outOrderNo").empty();
         		  $.getJSON('<%=basePath%>pages/orderSelect', { type: $(this).val() },function(result){
         			     $.each(result, function(i, field){
         			      $("#outOrderNo").append($("<option/>").text(field).attr("value",i));
@@ -39,6 +33,9 @@
         			  });
         	 
          });
+         
+       $('#orderType').change();
+         
      });
 </script>
 </head>

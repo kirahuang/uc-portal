@@ -120,7 +120,7 @@
 				<version>8.1.16.v20140903</version>
 				<configuration>
 					<webApp>
-						<contextPath>/</contextPath>
+						<contextPath>/portal-web</contextPath>
 						<descriptor>${basedir}/web/WEB-INF/web.xml</descriptor>
 					</webApp>
 					<webAppSourceDirectory>${basedir}/web</webAppSourceDirectory>
