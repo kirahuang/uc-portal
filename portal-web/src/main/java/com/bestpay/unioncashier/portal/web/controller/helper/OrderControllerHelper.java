@@ -19,8 +19,8 @@ import java.util.Map;
  * </p>
  * User: Jiaju Date: 2016/07/08 ProjectName: oms Version: 1.0
  */
-@Slf4j
 @Component
+@Slf4j
 public class OrderControllerHelper {
 
     //加密的钥匙
@@ -58,14 +58,16 @@ public class OrderControllerHelper {
      *  验签
      * @param jsonString
      */
-    public void validate(String jsonString) {
+    public boolean validate(String jsonString) {
         Map<String, String> map = JsonConverter.jsonStringToMap(jsonString);
+        boolean result=false;
         try {
-            boolean result = SignValidateUtil.validate(map, map.get("sign"), TEST_KEY, "sign");
+            result = SignValidateUtil.validate(map, map.get("sign"), TEST_KEY, "sign");
             log.info("验签,验签结果: {}", result);
         } catch (Exception e) {
             log.info("验签,验签发生错误.", e);
         }
+        return result;
     }
 
 }

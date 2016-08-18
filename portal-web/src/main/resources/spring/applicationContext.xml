@@ -39,7 +39,7 @@
     <mvc:annotation-driven/>
 
     <!-- 配置页面文件后缀名 -->
-    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" p:prefix="/WEB-INF/pages/"
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" p:prefix="/pages/"
           p:suffix=".jsp"/>
 
     <!-- 配置文件 -->

@@ -32,11 +32,15 @@
         <property name="messageConverters">
             <list>
                 <bean id="stringHttpMessageConverter"
-                      class="org.springframework.http.converter.StringHttpMessageConverter" />
+                      class="org.springframework.http.converter.StringHttpMessageConverter" >
+                        <constructor-arg value="UTF-8"></constructor-arg>  
+                    </bean>
                 <bean id="formHttpMessageConverter"
                       class="org.springframework.http.converter.FormHttpMessageConverter" />
             </list>
         </property>
     </bean>
+    
+    
 
 </beans>

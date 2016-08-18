@@ -1,19 +1,24 @@
 package com.bestpay.unioncashier.portal.web.controller;
 
-import com.bestpay.unioncashier.portal.web.controller.dto.request.CancelRequestDto;
-import com.bestpay.unioncashier.portal.web.controller.dto.request.PaymentRequestDto;
-import com.bestpay.unioncashier.portal.web.controller.dto.request.QueryRequestDto;
-import com.bestpay.unioncashier.portal.web.controller.dto.request.RefundRequestDto;
-import com.bestpay.unioncashier.portal.web.controller.helper.OrderControllerHelper;
-import com.bestpay.unioncashier.portal.web.controller.util.JsonConverter;
+import java.util.HashMap;
+import java.util.Map;
+
 import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.Map;
+import com.alibaba.fastjson.JSONObject;
+import com.bestpay.unioncashier.portal.web.controller.dto.request.CancelRequestDto;
+import com.bestpay.unioncashier.portal.web.controller.dto.request.PaymentRequestDto;
+import com.bestpay.unioncashier.portal.web.controller.dto.request.PaymentResponseDto;
+import com.bestpay.unioncashier.portal.web.controller.dto.request.QueryRequestDto;
+import com.bestpay.unioncashier.portal.web.controller.dto.request.RefundRequestDto;
+import com.bestpay.unioncashier.portal.web.controller.helper.OrderControllerHelper;
+import com.bestpay.unioncashier.portal.web.controller.util.JsonConverter;
 
 /**
  * 统一收银台操作
@@ -36,6 +41,10 @@ public class OrderController {
     //商户号
     @Value("${TEST_URL}")
     private String                TEST_URL;
+    
+    //支付map
+    public static Map<String,String> orderMap = new HashMap<>();
+    
 
     /**
      * 支付订单操作
@@ -54,8 +63,13 @@ public class OrderController {
             String result = orderControllerHelper.requestToHttpServer(map, paymentRequestDto, "service.do");
 
             log.info("支付请求结果{}", result);
+            
+            PaymentResponseDto response = JSONObject.parseObject(result, PaymentResponseDto.class);
+            
             // 验签
-            orderControllerHelper.validate(result);
+            if(orderControllerHelper.validate(result) && response!=null && response.getIsSuccess().equals("T")&& response.getOrderState().equals("SUCCESS")){
+                orderMap.put(response.getOutTradeNo(), "PAY-"+response.getOutTradeNo());
+            }
 
             return result;
         } catch (Exception e) {
@@ -81,6 +95,9 @@ public class OrderController {
             //发送请求
             String result = orderControllerHelper.requestToHttpServer(map, cancelRequestDto, "service.do");
 
+            
+            CancelResponseDto response = JSONObject.parseObject(result, CancelResponseDto.class);
+            
             log.info("撤销请求结果{}", result);
             // 验签
             orderControllerHelper.validate(result);

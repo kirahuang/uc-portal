@@ -12,7 +12,6 @@ import org.springframework.web.servlet.ModelAndView;
  * User: Jiaju Date: 2016/04/28 ProjectName: oms Version: 1.0
  */
 @Controller
-@Slf4j
 @RequestMapping(value = "pages")
 public class EntryController {
 
@@ -23,7 +22,7 @@ public class EntryController {
         return mav;
     }
 
-    @RequestMapping("pay")
+    @RequestMapping("payment")
     public ModelAndView pay(){
         ModelAndView mav=new ModelAndView("payment");
         return  mav;
@@ -44,6 +43,12 @@ public class EntryController {
     @RequestMapping("index")
     public ModelAndView index(){
         ModelAndView mac=new ModelAndView("index");
+        return  mac;
+    }
+    
+    @RequestMapping("prepayment")
+    public ModelAndView prepayment(){
+        ModelAndView mac=new ModelAndView("prepayment");
         return  mac;
     }
 

@@ -13,19 +13,19 @@ import lombok.ToString;
 public class BaseResponseDto {
 
     /** 是否成功, T 代表成功, F 代表失败 */
-    private String isSuccess;
+     String isSuccess;
 
     /** 签名方式 */
-    private String signType;
+     String signType;
 
     /** 签名 */
-    private String sign;
+     String sign;
 
     /** 错误码 */
-    private String errorCode;
+     String errorCode;
 
     /** 错误描述 */
-    private String errorMsg;
+     String errorMsg;
 
     @JSONField(name = "is_success")
     public String getIsSuccess() {
