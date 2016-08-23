@@ -13,7 +13,9 @@
 	<properties>
 		<org.slf4j-version>1.7.12</org.slf4j-version>
 		<org.slf4j.logback-version>1.1.3</org.slf4j.logback-version>
-
+		<httpcomponents.http.version>4.3.5</httpcomponents.http.version>
+		<httpcomponents.http.core.version>4.4.1</httpcomponents.http.core.version>
+		<httpcomponents.http.client.version>4.5</httpcomponents.http.client.version>
 	</properties>
 
 	<dependencies>
@@ -26,9 +28,8 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
+			<version>4.0.3.RELEASE</version>
 		</dependency>
-
-
 
 		<dependency>
 			<groupId>junit</groupId>
@@ -40,6 +41,7 @@
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>fastjson</artifactId>
+			<version>1.1.15</version>
 		</dependency>
 
 		<!--http配置 -->
@@ -58,6 +60,7 @@
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpmime</artifactId>
+			<version>4.3.5</version>
 		</dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
@@ -105,9 +108,9 @@
 
 
 		<dependency>
-		    <groupId>org.apache.commons</groupId>
-		    <artifactId>commons-lang3</artifactId>
-		    <version>3.4</version>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.4</version>
 		</dependency>
 
 	</dependencies>
@@ -129,14 +132,6 @@
 						<port>8080</port>
 					</httpConnector>
 
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-release-plugin</artifactId>
-				<version>2.5.3</version>
-				<configuration>
-					<tagBase>https://github.com/kirahuang/uc-portal.git</tagBase>
 				</configuration>
 			</plugin>
 		</plugins>
