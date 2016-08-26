@@ -167,7 +167,7 @@ $(function(){
         </table>
 
         <p>
-            <button type="submit" class="btn btn-success btn-lg">订单确认</button>
+            <button type="submit" class="btn btn-success btn-lg">订单确认(扫描枪用户请不要点击此按钮!)</button>
         </p>
     </form>
 </center>
