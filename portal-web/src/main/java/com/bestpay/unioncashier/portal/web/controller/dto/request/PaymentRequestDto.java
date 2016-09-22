@@ -83,12 +83,12 @@ public class PaymentRequestDto extends BaseRequestDto {
         this.productCode = productCode;
     }
 
-    @JSONField(name = "total_amout")
+    @JSONField(name = "total_amount")
     public Long getTotalAmount() {
         return totalAmount;
     }
 
-    @JSONField(name = "total_amout")
+    @JSONField(name = "total_amount")
     public void setTotalAmount(Long totalAmount) {
         this.totalAmount = totalAmount;
     }
