@@ -60,7 +60,6 @@ public class OrderController {
         try {
             log.info("支付对象的数据：{}", paymentRequestDto);
             Map<String, String> map = JsonConverter.objectToMap(paymentRequestDto);
-
             //发送请求
             String result = orderControllerHelper.requestToHttpServer(map, paymentRequestDto, "service.do");
 

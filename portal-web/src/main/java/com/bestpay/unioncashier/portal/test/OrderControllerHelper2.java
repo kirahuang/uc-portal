@@ -1,4 +1,10 @@
-package com.bestpay.unioncashier.portal.web.controller.helper;
+package com.bestpay.unioncashier.portal.test;
+
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -6,22 +12,13 @@ import com.bestpay.unioncashier.portal.web.controller.util.HttpClientUtil;
 import com.bestpay.unioncashier.portal.web.controller.util.JsonConverter;
 import com.bestpay.unioncashier.portal.web.controller.util.MessaUtil;
 import com.bestpay.unioncashier.portal.web.controller.util.SignValidateUtil;
+
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 
-import java.util.Map;
 
-/**
- * 类注释
- * <p>
- * </p>
- * User: Jiaju Date: 2016/07/08 ProjectName: oms Version: 1.0
- */
 @Component
 @Slf4j
-public class OrderControllerHelper {
+public class OrderControllerHelper2 {
 
     //加密的钥匙
     @Value("${TEST_KEY}")
@@ -34,16 +31,13 @@ public class OrderControllerHelper {
     @Autowired
     private HttpClientUtil httpClientUtil;
 
-    public String requestToHttpServer(Map<String, String> map, Object sendObject,
-                                      String actionUrl) {
+    public String requestToHttpServer(Map<String, String> map) {
         String sign;
         String postMsg;
         try {
-            System.out.println(">>>>>>>>>>>>>>>>>>>"+JSON.toJSONString(map));
-            
+            System.out.println("begin>>>>>>>>>>>>>>>>>>>"+JSON.toJSONString(map));
             sign = SignValidateUtil.sign(map, TEST_KEY, "sign");
-            JSONObject jsonObject = (JSONObject) JSON.toJSON(sendObject);
-            postMsg = MessaUtil.boxSignMessage(JSON.toJSONString(jsonObject), sign);
+            postMsg = MessaUtil.boxSignMessage(JSON.toJSONString(map), sign);
         } catch (Exception e) {
             log.error("签名失败", e);
             return e.getMessage();
@@ -51,8 +45,8 @@ public class OrderControllerHelper {
         log.info("签名成功，签名值:{}:", sign);
 
         //发送请求
-        String result = httpClientUtil.sendHttpJsonRequest(TEST_URL + actionUrl, postMsg);
-
+        String result = httpClientUtil.sendHttpJsonRequest(TEST_URL +"service.do", postMsg);
+        System.out.println("end>>>>>>>>>>>>>>>>>>>"+result);
         return result;
     }
 
@@ -60,8 +54,7 @@ public class OrderControllerHelper {
      *  验签
      * @param jsonString
      */
-    public boolean validate(String jsonString) {
-        Map<String, String> map = JsonConverter.jsonStringToMap(jsonString);
+    public boolean validate(Map<String, String> map) {
         boolean result=false;
         try {
             result = SignValidateUtil.validate(map, map.get("sign"), TEST_KEY, "sign");
