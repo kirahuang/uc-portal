@@ -25,7 +25,8 @@ public class TestClient  {
     @Autowired
     protected ApplicationContext ctx;
     
-    String merchant_id = "20000146";//20000000
+    String merchant_id = "20000000";//20000000
+//    String merchant_id = "20000148";//20000000
     
    List<String> payll = new ArrayList<>();
     
